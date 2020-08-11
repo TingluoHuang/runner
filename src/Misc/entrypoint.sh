@@ -34,9 +34,7 @@ if [ -n "${RUNNER_LABELS}" ]; then
     RUNNER_LABELS_ARG="--labels ${RUNNER_LABELS}"
 fi
 
-hostip=$(route -n|grep ^0.0.0.0|awk '{ print $2 }'|sed 's/\.[^.]*$/.1/'|tr -d '\n')
-
-export http_proxy=http://$hostip:9090
+export http_proxy=http://$K8S_HOST_IP:9090
 
 curl -v -s -X POST ${GITHUB_API_URL}/${orgs_or_repos}/${GITHUB_RUNNER_SCOPE}/actions/runners/registration-token -H "authorization: token $GITHUB_PAT" -H "accept: application/vnd.github.everest-preview+json"
 
@@ -46,5 +44,15 @@ RUNNER_REG_TOKEN=$(curl -s -X POST ${GITHUB_API_URL}/${orgs_or_repos}/${GITHUB_R
 # Create the runner and configure it
 ./config.sh --unattended --name $RUNNER_NAME --url $RUNNER_REG_URL --token $RUNNER_REG_TOKEN $RUNNER_LABELS_ARG --replace --ephemeral
 
+# while (! docker version ); do
+#   # Docker takes a few seconds to initialize
+#   echo "Waiting for Docker to launch..."
+#   sleep 1
+# done
+
 # Run it
 ./bin/runsvc.sh interactive
+
+# export http_proxy=""
+# dockerdpid=$(kubectl exec $K8S_POD_NAME --container docker-host -- pidof dockerd)
+# kubectl exec $K8S_POD_NAME --container docker-host -- kill -SIGINT $dockerdpid
