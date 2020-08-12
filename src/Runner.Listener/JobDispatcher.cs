@@ -506,7 +506,7 @@ namespace GitHub.Runner.Listener
                                 {
                                     await jobStartInvoker.ExecuteAsync(
                                         workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                        fileName: WhichUtil.Which("sh"),
+                                        fileName: WhichUtil.Which("bash"),
                                         arguments: jobStartNotification,
                                         environment: null,
                                         requireExitCodeZero: true,
@@ -689,7 +689,7 @@ namespace GitHub.Runner.Listener
                                     {
                                         await jobCompleteInvoker.ExecuteAsync(
                                             workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                            fileName: WhichUtil.Which("sh"),
+                                            fileName: WhichUtil.Which("bash"),
                                             arguments: jobCompleteNotification,
                                             environment: null,
                                             requireExitCodeZero: true,
@@ -770,7 +770,7 @@ namespace GitHub.Runner.Listener
                                 {
                                     await jobRunningInvoker.ExecuteAsync(
                                         workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                        fileName: WhichUtil.Which("sh"),
+                                        fileName: WhichUtil.Which("bash"),
                                         arguments: jobRunningNotification,
                                         environment: null,
                                         requireExitCodeZero: true,
@@ -784,7 +784,7 @@ namespace GitHub.Runner.Listener
                                 }
                                 catch (Exception ex)
                                 {
-                                    Trace.Error($"Fail to publish JobStart notification: {ex}");
+                                    Trace.Error($"Fail to publish JobRunning notification: {ex}");
                                 }
                             }
                         }
