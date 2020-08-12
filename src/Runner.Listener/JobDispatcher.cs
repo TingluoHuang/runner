@@ -506,8 +506,8 @@ namespace GitHub.Runner.Listener
                                 {
                                     await jobStartInvoker.ExecuteAsync(
                                         workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                        fileName: jobStartNotification,
-                                        arguments: "",
+                                        fileName: WhichUtil.Which("sh"),
+                                        arguments: jobStartNotification,
                                         environment: null,
                                         requireExitCodeZero: true,
                                         outputEncoding: null,
@@ -689,8 +689,8 @@ namespace GitHub.Runner.Listener
                                     {
                                         await jobCompleteInvoker.ExecuteAsync(
                                             workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                            fileName: jobCompleteNotification,
-                                            arguments: "",
+                                            fileName: WhichUtil.Which("sh"),
+                                            arguments: jobCompleteNotification,
                                             environment: null,
                                             requireExitCodeZero: true,
                                             outputEncoding: null,
@@ -770,8 +770,8 @@ namespace GitHub.Runner.Listener
                                 {
                                     await jobRunningInvoker.ExecuteAsync(
                                         workingDirectory: HostContext.GetDirectory(WellKnownDirectory.Root),
-                                        fileName: jobRunningNotification,
-                                        arguments: "",
+                                        fileName: WhichUtil.Which("sh"),
+                                        arguments: jobRunningNotification,
                                         environment: null,
                                         requireExitCodeZero: true,
                                         outputEncoding: null,
