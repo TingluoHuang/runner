@@ -34,7 +34,9 @@ if [ -n "${RUNNER_LABELS}" ]; then
     RUNNER_LABELS_ARG="--labels ${RUNNER_LABELS}"
 fi
 
-export http_proxy=http://$K8S_HOST_IP:9090
+if [ -n "${K8S_HOST_IP}" ]; then
+    export http_proxy=http://$K8S_HOST_IP:9090
+fi
 
 curl -v -s -X POST ${GITHUB_API_URL}/${orgs_or_repos}/${GITHUB_RUNNER_SCOPE}/actions/runners/registration-token -H "authorization: token $GITHUB_PAT" -H "accept: application/vnd.github.everest-preview+json"
 

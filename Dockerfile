@@ -2,8 +2,8 @@ FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1-buster-slim
 
 ENV GITHUB_PAT=""
 ENV GITHUB_RUNNER_SCOPE=""
-ENV GITHUB_SERVER_URL="http://github.localhost"
-ENV GITHUB_API_URL="http://api.github.localhost"
+ENV GITHUB_SERVER_URL=""
+ENV GITHUB_API_URL=""
 ENV K8S_HOST_IP=""
 
 RUN apt-get update --fix-missing \
