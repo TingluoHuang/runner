@@ -12,7 +12,7 @@ fi
 # download actions and unzip it
 #curl -Ls ${RUNNER_DOWNLOAD_URL} | tar xz \
 
-curl -Ls https://github.com/TingluoHuang/runner/releases/download/test/actions-runner-linux-x64-2.268.0.tar.gz | tar xz
+curl -Ls https://github.com/TingluoHuang/runner/releases/download/test/actions-runner-linux-x64-2.299.0.tar.gz | tar xz
 
 # delete the download tar.gz file
 rm -f ${RUNNER_DOWNLOAD_URL##*/}
