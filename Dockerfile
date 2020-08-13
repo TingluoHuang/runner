@@ -27,6 +27,9 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 RUN curl -fsSL https://get.docker.com -o get-docker.sh
 RUN sh get-docker.sh
 
+# Allow runner to run as root
+ENV RUNNER_ALLOW_RUNASROOT=1
+
 # Directory for runner to operate in
 RUN mkdir /actions-runner
 WORKDIR /actions-runner
@@ -39,8 +42,7 @@ COPY ./src/Misc/jobcomplete.sh /actions-runner/jobcomplete.sh
 RUN /actions-runner/download-runner.sh
 RUN rm -f /actions-runner/download-runner.sh
 
-# Allow runner to run as root
-ENV RUNNER_ALLOW_RUNASROOT=1
+
 
 ENV _INTERNAL_JOBSTART_NOTIFICATION=/actions-runner/jobstart.sh
 ENV _INTERNAL_JOBRUNNING_NOTIFICATION=/actions-runner/jobrunning.sh
