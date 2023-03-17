@@ -216,6 +216,7 @@ namespace GitHub.Runner.Worker.Container.ContainerHooks
             {
                 throw new Exception($"Response file could not be read at '{HookScriptPath}' running command '{input.Command}'");
             }
+            Trace.Verbose($"Current container hook response: {JsonUtility.ToString(response)}");
             response?.Validate(input);
             return response;
         }
@@ -229,6 +230,7 @@ namespace GitHub.Runner.Worker.Container.ContainerHooks
             }
             context.Global.ContainerHookState = hookState;
             Trace.Info($"Global variable 'ContainerHookState' updated successfully for '{input.Command}' with data found in 'state' property of the response file.");
+            Trace.Verbose($"Current container hook state: {JsonUtility.ToString(context.Global.ContainerHookState)}");
         }
 
         private void UpdateJobContext(IExecutionContext context, ContainerInfo jobContainer, List<ContainerInfo> serviceContainers, PrepareJobResponse response)
