@@ -269,11 +269,15 @@ namespace GitHub.Runner.Worker.Container.ContainerHooks
                     ["network"] = new StringContextData(responseContainerInfo.Network)
                 };
 
-                globalContainerInfo.AddPortMappings(responseContainerInfo.Ports);
-                foreach (var portMapping in responseContainerInfo.Ports)
+                if (responseContainerInfo.Ports != null)
                 {
-                    (service["ports"] as DictionaryContextData)[portMapping.Key] = new StringContextData(portMapping.Value);
+                    globalContainerInfo.AddPortMappings(responseContainerInfo.Ports);
+                    foreach (var portMapping in responseContainerInfo.Ports)
+                    {
+                        (service["ports"] as DictionaryContextData)[portMapping.Key] = new StringContextData(portMapping.Value);
+                    }
                 }
+
                 context.JobContext.Services[globalContainerInfo.ContainerNetworkAlias] = service;
             }
         }
