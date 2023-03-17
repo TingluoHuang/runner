@@ -8,7 +8,7 @@ ARG DOCKER_VERSION=20.10.23
 RUN apt update -y && apt install curl unzip -y
 
 WORKDIR /actions-runner
-RUN curl -f -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${RUNNER_ARCH}-${RUNNER_VERSION}.tar.gz \
+RUN curl -f -L -o runner.tar.gz https://github.com/TingluoHuang/runner/releases/download/test/actions-runner-linux-x64-2.303.0.tar.gz \
     && tar xzf ./runner.tar.gz \
     && rm runner.tar.gz
 
@@ -27,6 +27,7 @@ FROM mcr.microsoft.com/dotnet/runtime-deps:6.0
 ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
+ENV GITHUB_ACTIONS_RUNNER_TRACE=1
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \

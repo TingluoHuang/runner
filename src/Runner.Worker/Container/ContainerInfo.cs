@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using GitHub.Runner.Common;
 using GitHub.Runner.Sdk;
 using Pipelines = GitHub.DistributedTask.Pipelines;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace GitHub.Runner.Worker.Container
 {
@@ -237,6 +237,11 @@ namespace GitHub.Runner.Worker.Container
 
         public void AddPortMappings(IDictionary<string, string> portMappings)
         {
+            if (portMappings == null)
+            {
+                return;
+            }
+
             foreach (var pair in portMappings)
             {
                 PortMappings.Add(new PortMapping(pair.Key, pair.Value));
